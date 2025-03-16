@@ -11,4 +11,9 @@ import com.example.passvault.features.password.domain.model.Password
 
 abstract class PasswordDatabase : RoomDatabase() {
     abstract val passwordDao: PasswordDao
+
+    companion object {
+        const val DATABASE_NAME = "passwords_db"
+    }
+
 }

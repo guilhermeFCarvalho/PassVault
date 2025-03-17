@@ -10,3 +10,5 @@ data class Password(
     val label:  String,
     @PrimaryKey val id: Int? = null
 )
+
+class InvalidPasswordException(message: String): Exception(message)

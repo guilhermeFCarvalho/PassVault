@@ -7,6 +7,7 @@ import com.example.passvault.features.password.domain.repository.PasswordReposit
 import com.example.passvault.features.password.domain.use_case.AddPasswordUseCase
 import com.example.passvault.features.password.domain.use_case.DeletePasswordUseCase
 import com.example.passvault.features.password.domain.use_case.GetPasswordsUseCase
+import com.example.passvault.features.password.domain.use_case.GetSinglePasswordUseCase
 import com.example.passvault.features.password.domain.use_case.PasswordUseCases
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -23,9 +24,12 @@ val appModule = module {
     }
     single<PasswordUseCases>{
         PasswordUseCases(
-            getPasswordUseCases = GetPasswordsUseCase(get()),
+            getPasswordsUseCases = GetPasswordsUseCase(get()),
             deletePasswordUseCase = DeletePasswordUseCase(get()),
-            addPasswordUseCase = AddPasswordUseCase(get())
+            addPasswordUseCase = AddPasswordUseCase(get()),
+            getSinglePasswordUseCase = GetSinglePasswordUseCase(get()),
         )
     }
+
+
 }

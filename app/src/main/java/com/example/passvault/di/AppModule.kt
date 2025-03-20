@@ -1,5 +1,4 @@
 package com.example.passvault.di
-
 import androidx.room.Room
 import com.example.passvault.features.password.data.datasource.PasswordDatabase
 import com.example.passvault.features.password.data.repository.PasswordRepositoryImpl
@@ -9,8 +8,13 @@ import com.example.passvault.features.password.domain.use_case.DeletePasswordUse
 import com.example.passvault.features.password.domain.use_case.GetPasswordsUseCase
 import com.example.passvault.features.password.domain.use_case.GetSinglePasswordUseCase
 import com.example.passvault.features.password.domain.use_case.PasswordUseCases
+import com.example.passvault.features.password.presentation.add_password.AddPasswordViewModel
+import com.example.passvault.features.password.presentation.password.PasswordViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
+
 
 val appModule = module {
     single{
@@ -30,6 +34,10 @@ val appModule = module {
             getSinglePasswordUseCase = GetSinglePasswordUseCase(get()),
         )
     }
+    viewModel <PasswordViewModel>{
+        PasswordViewModel(get())
+    }
+    viewModelOf(::AddPasswordViewModel)
 
 
 }

@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.domain.use_case.PasswordUseCases
 import com.example.passvault.features.password.domain.util.order_type.OrderType
-import com.example.passvault.features.password.domain.util.order_type.PasswordOrder
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,26 +24,17 @@ class PasswordViewModel(
     private var getPasswordsJob: Job? = null
 
     init {
-        getPasswords(PasswordOrder.Label(OrderType.Descending))
+        getPasswords(OrderType.Descending)
     }
 
     fun onEvent(event: PasswordEvent) {
         when (event) {
-            is PasswordEvent.Order -> {
-                if (state.value.passwordOrder::class == event.passwordOrder::class && state.value.passwordOrder.orderType == event.passwordOrder.orderType) {
-                    return
-                }
-                getPasswords(event.passwordOrder)
-
-            }
-
             is PasswordEvent.RestorePassword -> {
                 viewModelScope.launch {
                     passwordUseCases.addPasswordUseCase(lastDeletedPassword ?: return@launch)
                     lastDeletedPassword = null
 
                 }
-
             }
 
             is PasswordEvent.DeletePassword -> {
@@ -55,21 +45,27 @@ class PasswordViewModel(
 
             }
 
-            is PasswordEvent.ToggleOrderSection -> {
-                _state.value = state.value.copy(
-                    isOrderSectionVisible = !state.value.isOrderSectionVisible
-                )
+            is PasswordEvent.OrderPasswords -> {
+                if (state.value.orderType is OrderType.Ascending) {
+                    _state.value = state.value.copy(
+                        isOrderSectionVisible = !state.value.isOrderSectionVisible
+                    )
+
+                } else {
+                    _state.value = state.value.copy(
+                        isOrderSectionVisible = !state.value.isOrderSectionVisible
+                    )
+                }
 
             }
         }
     }
 
-    private fun getPasswords(order: PasswordOrder) {
+    private fun getPasswords(passwordOrder: OrderType) {
         getPasswordsJob?.cancel()
-        getPasswordsJob = passwordUseCases.getPasswordUseCases(order).onEach { passwords ->
+        getPasswordsJob = passwordUseCases.getPasswordsUseCases(passwordOrder).onEach { passwords ->
             _state.value = state.value.copy(
                 passwords = passwords,
-                passwordOrder = order
             )
         }.launchIn(viewModelScope)
 

@@ -26,17 +26,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.passvault.core.presentation.util.Screens
 import com.example.passvault.features.password.presentation.password.PasswordEvent
 import com.example.passvault.features.password.presentation.password.PasswordViewModel
 import com.example.passvault.features.password.presentation.password.components.PasswordItemComponent
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun PasswordListScreen(
     navController: NavController,
-    viewModel: PasswordViewModel,
+    viewModel : PasswordViewModel = koinViewModel()
 ) {
+
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
@@ -45,7 +48,9 @@ fun PasswordListScreen(
         scaffoldState = scaffoldState,
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {},
+                onClick = {
+                    navController.navigate(Screens.AddPasswordsScreen.route)
+                },
                 content = {
                     Icons.Default.Add
                 },
@@ -91,7 +96,9 @@ fun PasswordListScreen(
                                 }
                             }
                         },
-                        editOnClick = {},
+                        editOnClick = {
+                            navController.navigate(Screens.AddPasswordsScreen.route + "?passwordId={${password.id}}")
+                        },
                     )
                     Spacer(Modifier.height(16.dp))
                 }

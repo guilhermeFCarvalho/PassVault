@@ -12,6 +12,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.passvault.core.presentation.util.Screens
+import com.example.passvault.features.password.presentation.add_password.screens.AddPasswordScreen
+import com.example.passvault.features.password.presentation.password.screens.PasswordListScreen
 import com.example.passvault.ui.theme.PassVaultTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,15 +22,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PassVaultTheme {
-
                 Surface(color = MaterialTheme.colorScheme.background) {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screens.PasswordsScreen
+                        startDestination = Screens.PasswordsScreen.route
                     ) {
                         composable(route = Screens.PasswordsScreen.route) {
-                            //PasswordScreenComposable
+                            PasswordListScreen(navController = navController)
                         }
                         composable(
                             route = Screens.AddPasswordsScreen.route + "?passwordId={passwordId}",
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            //AddPasswordScreenComposable
+                            AddPasswordScreen(navController = navController)
 
                         }
                     }

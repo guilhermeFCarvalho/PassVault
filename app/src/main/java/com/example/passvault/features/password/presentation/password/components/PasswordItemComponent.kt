@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.passvault.features.password.domain.model.Password
+import com.example.passvault.features.password.presentation.shared.components.HidePasswordButtonComponent
 import com.example.passvault.ui.theme.PassVaultTheme
 
 
@@ -64,17 +65,9 @@ fun PasswordItemComponent(
                             )
                         }
 
-                        Icon(
-                            if (isPasswordVisible) {
-                                Icons.Filled.Visibility
-                            } else {
-                                Icons.Filled.VisibilityOff
-                            },
-                            contentDescription = "Toggle password visibility",
-                            modifier = Modifier
-                                .size(16.dp)
-                                .padding(horizontal = 4.dp)
-                                .clickable { isPasswordVisible = !isPasswordVisible }
+                        HidePasswordButtonComponent(
+                            isPasswordVisible = isPasswordVisible,
+                            onClick = { isPasswordVisible = it },
                         )
                     }
                 }

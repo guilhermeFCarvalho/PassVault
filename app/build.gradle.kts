@@ -78,4 +78,5 @@ dependencies {
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
     implementation(libs.room.ktx)
+    implementation(libs.koin.androidx.compose.navigation)
 }

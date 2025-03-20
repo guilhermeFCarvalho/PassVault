@@ -1,5 +1,6 @@
 package com.example.passvault.di
 import androidx.room.Room
+import com.example.passvault.features.password.data.datasource.PasswordDao
 import com.example.passvault.features.password.data.datasource.PasswordDatabase
 import com.example.passvault.features.password.data.repository.PasswordRepositoryImpl
 import com.example.passvault.features.password.domain.repository.PasswordRepository
@@ -23,6 +24,11 @@ val appModule = module {
             klass = PasswordDatabase::class.java,
             name = PasswordDatabase.DATABASE_NAME ).build()
     }
+
+    single{
+        get<PasswordDatabase>().passwordDao
+    }
+
     single <PasswordRepository>{
         PasswordRepositoryImpl(get())
     }

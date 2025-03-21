@@ -39,7 +39,7 @@ class AddPasswordViewModel(
                             password = it.password
                         )
                         _label.value = label.value.copy(
-                            password = it.label
+                            label = it.label
                         )
                     }
 

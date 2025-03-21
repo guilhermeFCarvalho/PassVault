@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.passvault.core.presentation.util.Screens
 import com.example.passvault.features.password.presentation.add_password.screens.AddPasswordScreen
-import com.example.passvault.features.password.presentation.password.screens.PasswordListScreen
+import com.example.passvault.features.password.presentation.password_list.screens.PasswordListScreen
 import com.example.passvault.ui.theme.PassVaultTheme
 
 class MainActivity : ComponentActivity() {

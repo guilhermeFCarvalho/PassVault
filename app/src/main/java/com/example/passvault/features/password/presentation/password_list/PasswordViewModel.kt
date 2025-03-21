@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.password
+package com.example.passvault.features.password.presentation.password_list
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -48,14 +48,15 @@ class PasswordViewModel(
             is PasswordEvent.OrderPasswords -> {
                 if (state.value.orderType is OrderType.Ascending) {
                     _state.value = state.value.copy(
-                        isOrderSectionVisible = !state.value.isOrderSectionVisible
+                        orderType = OrderType.Descending
                     )
 
                 } else {
                     _state.value = state.value.copy(
-                        isOrderSectionVisible = !state.value.isOrderSectionVisible
+                        orderType = OrderType.Ascending
                     )
                 }
+                getPasswords(passwordOrder = state.value.orderType)
 
             }
         }

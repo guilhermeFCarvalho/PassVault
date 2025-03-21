@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.password.screens
+package com.example.passvault.features.password.presentation.password_list.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,9 +27,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.passvault.core.presentation.util.Screens
-import com.example.passvault.features.password.presentation.password.PasswordEvent
-import com.example.passvault.features.password.presentation.password.PasswordViewModel
-import com.example.passvault.features.password.presentation.password.components.PasswordItemComponent
+import com.example.passvault.features.password.presentation.password_list.PasswordEvent
+import com.example.passvault.features.password.presentation.password_list.PasswordViewModel
+import com.example.passvault.features.password.presentation.password_list.components.PasswordItemComponent
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -52,7 +52,7 @@ fun PasswordListScreen(
                     navController.navigate(Screens.AddPasswordsScreen.route)
                 },
                 content = {
-                    Icons.Default.Add
+                    Icon(Icons.Default.Add, contentDescription = "Add Password")
                 },
             )
         }
@@ -97,7 +97,7 @@ fun PasswordListScreen(
                             }
                         },
                         editOnClick = {
-                            navController.navigate(Screens.AddPasswordsScreen.route + "?passwordId={${password.id}}")
+                            navController.navigate(Screens.AddPasswordsScreen.route + "?passwordId=${password.id}")
                         },
                     )
                     Spacer(Modifier.height(16.dp))

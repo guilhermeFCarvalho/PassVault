@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.password
+package com.example.passvault.features.password.presentation.password_list
 
 import com.example.passvault.features.password.domain.model.Password
 

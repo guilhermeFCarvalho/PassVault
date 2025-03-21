@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.password.components
+package com.example.passvault.features.password.presentation.password_list.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,8 +19,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CopyAll
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.ModeEditOutline
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,8 +44,14 @@ fun PasswordItemComponent(
 
     PassVaultTheme {
         Card() {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(modifier = Modifier.padding(8.dp)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                Column{
                     Row {
                         Text(text = password.label)
                     }
@@ -79,7 +84,7 @@ fun PasswordItemComponent(
                         modifier = Modifier
                             .size(16.dp)
                             .padding(end = 4.dp)
-                            .clickable { }
+                            .clickable { deleteOnClick() }
                     )
                     Spacer(Modifier.height(12.dp))
                     Icon(
@@ -88,7 +93,7 @@ fun PasswordItemComponent(
                         modifier = Modifier
                             .size(16.dp)
                             .padding(end = 4.dp)
-                            .clickable { }
+                            .clickable { editOnClick() }
                     )
                     Spacer(Modifier.height(12.dp))
                     Icon(

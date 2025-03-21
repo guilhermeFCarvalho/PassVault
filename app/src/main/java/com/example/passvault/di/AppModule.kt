@@ -1,6 +1,5 @@
 package com.example.passvault.di
 import androidx.room.Room
-import com.example.passvault.features.password.data.datasource.PasswordDao
 import com.example.passvault.features.password.data.datasource.PasswordDatabase
 import com.example.passvault.features.password.data.repository.PasswordRepositoryImpl
 import com.example.passvault.features.password.domain.repository.PasswordRepository
@@ -10,7 +9,7 @@ import com.example.passvault.features.password.domain.use_case.GetPasswordsUseCa
 import com.example.passvault.features.password.domain.use_case.GetSinglePasswordUseCase
 import com.example.passvault.features.password.domain.use_case.PasswordUseCases
 import com.example.passvault.features.password.presentation.add_password.AddPasswordViewModel
-import com.example.passvault.features.password.presentation.password.PasswordViewModel
+import com.example.passvault.features.password.presentation.password_list.PasswordViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf

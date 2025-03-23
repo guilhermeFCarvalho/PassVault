@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.room.util.copy
 import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.presentation.shared.components.HidePasswordButtonComponent
 import com.example.passvault.ui.theme.PassVaultTheme
@@ -38,12 +39,13 @@ import com.example.passvault.ui.theme.PassVaultTheme
 fun PasswordItemComponent(
     password: Password,
     deleteOnClick: () -> Unit,
-    editOnClick: () -> Unit
+    editOnClick: () -> Unit,
+    copyOnClick: () -> Unit,
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
 
     PassVaultTheme {
-        Card() {
+        Card {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -51,7 +53,7 @@ fun PasswordItemComponent(
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                Column{
+                Column {
                     Row {
                         Text(text = password.label)
                     }
@@ -103,7 +105,7 @@ fun PasswordItemComponent(
                             .size(16.dp)
                             .padding(end = 4.dp)
                             .clickable {
-
+                                copyOnClick()
                             }
                     )
                 }
@@ -126,5 +128,6 @@ fun PasswordItemComponentPreview() {
             ),
         editOnClick = {},
         deleteOnClick = {},
+        copyOnClick = {},
     )
 }

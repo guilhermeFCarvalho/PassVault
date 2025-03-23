@@ -1,5 +1,8 @@
 package com.example.passvault.features.password.presentation.password_list.screens
 
+import android.content.ClipData
+import android.content.ClipDescription
+import android.os.PersistableBundle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,6 +27,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ClipEntry
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.passvault.core.presentation.util.Screens
@@ -43,6 +49,8 @@ fun PasswordListScreen(
     val state = viewModel.state.value
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+
+    val clipboard = LocalClipboardManager.current
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -99,6 +107,16 @@ fun PasswordListScreen(
                         editOnClick = {
                             navController.navigate(Screens.AddPasswordsScreen.route + "?passwordId=${password.id}")
                         },
+                        copyOnClick = {
+                            val clipData = ClipData.newPlainText("Password", password.password)
+                            clipData.apply {
+                                description.extras = PersistableBundle().apply {
+                                    putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true)
+                                }
+                            }
+                            val clipEntry = ClipEntry(clipData)
+                            clipboard.setClip(clipEntry)
+                        }
                     )
                     Spacer(Modifier.height(16.dp))
                 }

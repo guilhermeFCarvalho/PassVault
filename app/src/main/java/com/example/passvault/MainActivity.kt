@@ -1,4 +1,4 @@
-package com.example.passvault.core.presentation
+package com.example.passvault
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

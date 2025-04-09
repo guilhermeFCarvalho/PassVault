@@ -12,7 +12,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,42 +22,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.passvault.features.password.presentation.addpassword.event.AddPasswordEvent
+import com.example.passvault.features.password.presentation.addpassword.state.PasswordTextFieldState
 import com.example.passvault.features.password.presentation.shared.component.HidePasswordButtonComponent
-import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.compose.koinViewModel
+import com.example.passvault.ui.theme.PassVaultTheme
 
 @Composable
 fun AddPasswordScreen(
-    navigateUp: () -> Unit,
-    viewModel: AddPasswordViewModel = koinViewModel()
+    labelState: PasswordTextFieldState,
+    passwordState: PasswordTextFieldState,
+    onEvent: (AddPasswordEvent) -> Unit,
+    snackbarState: SnackbarHostState,
+    modifier: Modifier = Modifier,
 ) {
-
-    val labelState = viewModel.label.value
-    val passwordState = viewModel.password.value
-
-    val snackbarState = remember { SnackbarHostState() }
 
     var isPasswordVisible by rememberSaveable { mutableStateOf(false) }
 
-    LaunchedEffect(key1 = true) {
-        viewModel.eventFlow.collectLatest { event ->
-            when (event) {
-                is AddPasswordViewModel.UiEvent.ShowSnackBar -> {
-                    snackbarState.showSnackbar(
-                        message = event.message
-                    )
-                }
-
-                is AddPasswordViewModel.UiEvent.SavePassword -> {
-                    navigateUp()
-                }
-            }
-        }
-    }
-
     Scaffold(
+        modifier = modifier,
         snackbarHost = {
             SnackbarHost(snackbarState)
         },
@@ -77,10 +60,8 @@ fun AddPasswordScreen(
             TextField(
                 value = labelState.label,
                 onValueChange = { label ->
-                    viewModel.onEvent(
-                        AddPasswordEvent.LabelChanged(
-                            label
-                        )
+                    onEvent(
+                        AddPasswordEvent.LabelChanged(label)
                     )
                 },
                 label = { Text("Label") },
@@ -91,10 +72,8 @@ fun AddPasswordScreen(
             TextField(
                 value = passwordState.password,
                 onValueChange = { password ->
-                    viewModel.onEvent(
-                        AddPasswordEvent.PasswordChanged(
-                            password
-                        )
+                    onEvent(
+                        AddPasswordEvent.PasswordChanged(password)
                     )
                 },
                 label = { Text("Password") },
@@ -115,11 +94,30 @@ fun AddPasswordScreen(
 
             Button(
                 onClick = {
-                    viewModel.onEvent(AddPasswordEvent.SavePassword)
+                    onEvent(AddPasswordEvent.SavePassword)
                 }
             ) {
                 Text("Save Password")
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun DefaultPreview() {
+    PassVaultTheme {
+        AddPasswordScreen(
+            labelState = PasswordTextFieldState(
+                password = "123",
+                label = "test"
+            ),
+            passwordState = PasswordTextFieldState(
+                password = "123",
+                label = "test"
+            ),
+            snackbarState = remember { SnackbarHostState() },
+            onEvent = {}
+        )
     }
 }

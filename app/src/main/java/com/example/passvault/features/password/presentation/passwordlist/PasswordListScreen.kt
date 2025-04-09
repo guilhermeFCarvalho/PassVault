@@ -28,21 +28,24 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.passvault.core.navigation.Screen
+import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.presentation.passwordlist.component.PasswordItemComponent
 import com.example.passvault.features.password.presentation.passwordlist.event.PasswordEvent
+import com.example.passvault.features.password.presentation.passwordlist.state.PasswordState
+import com.example.passvault.ui.theme.PassVaultTheme
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordListScreen(
+    state: PasswordState,
+    onEvent: (PasswordEvent) -> Unit,
     onNavigate: (String) -> Unit,
-    viewModel: PasswordViewModel = koinViewModel()
+    modifier: Modifier = Modifier,
 ) {
-
-    val state = viewModel.state.value
 
     val scope = rememberCoroutineScope()
     val snackbarState = remember { SnackbarHostState() }
@@ -50,6 +53,7 @@ fun PasswordListScreen(
     val clipboard = LocalClipboardManager.current
 
     Scaffold(
+        modifier = modifier,
         snackbarHost = {
             SnackbarHost(snackbarState)
         },
@@ -74,7 +78,7 @@ fun PasswordListScreen(
                 actions = {
                     IconButton(
                         onClick = {
-                            viewModel.onEvent(PasswordEvent.OrderPasswords)
+                            onEvent(PasswordEvent.OrderPasswords)
                         }
                     ) {
                         Icon(
@@ -97,14 +101,14 @@ fun PasswordListScreen(
                 PasswordItemComponent(
                     password = password,
                     deleteOnClick = {
-                        viewModel.onEvent(PasswordEvent.DeletePassword(password))
+                        onEvent(PasswordEvent.DeletePassword(password))
                         scope.launch {
                             val result = snackbarState.showSnackbar(
                                 message = "Password deleted!",
                                 actionLabel = "Undo"
                             )
                             if (result == SnackbarResult.ActionPerformed) {
-                                viewModel.onEvent(PasswordEvent.RestorePassword)
+                                onEvent(PasswordEvent.RestorePassword)
                             }
                         }
                     },
@@ -124,5 +128,24 @@ fun PasswordListScreen(
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+private fun DefaultPreview() {
+    PassVaultTheme {
+        PasswordListScreen(
+            state = PasswordState(
+                passwords = listOf(
+                    Password(
+                        password = "123",
+                        label = "test"
+                    )
+                )
+            ),
+            onEvent = {},
+            onNavigate = {}
+        )
     }
 }

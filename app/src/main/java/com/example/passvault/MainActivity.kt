@@ -12,8 +12,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.passvault.core.navigation.Screen
+import com.example.passvault.features.password.presentation.addpassword.AddPasswordRoute
 import com.example.passvault.features.password.presentation.addpassword.AddPasswordScreen
-import com.example.passvault.features.password.presentation.passwordlist.PasswordListScreen
+import com.example.passvault.features.password.presentation.passwordlist.PasswordListRoute
 import com.example.passvault.ui.theme.PassVaultTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Screen.PasswordsScreen.route
                     ) {
                         composable(route = Screen.PasswordsScreen.route) {
-                            PasswordListScreen(
+                            PasswordListRoute(
                                 onNavigate = {
                                     navController.navigate(it)
                                 }
@@ -46,10 +47,10 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            AddPasswordScreen(
+                            AddPasswordRoute(
                                 navigateUp = {
                                     navController.navigateUp()
-                                }
+                                },
                             )
                         }
                     }

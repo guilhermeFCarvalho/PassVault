@@ -69,6 +69,7 @@ fun PasswordListScreen(
     ) { padding ->
         Column(
             modifier = Modifier
+                .padding(padding)
                 .fillMaxSize()
                 .padding(16.dp)
         ) {

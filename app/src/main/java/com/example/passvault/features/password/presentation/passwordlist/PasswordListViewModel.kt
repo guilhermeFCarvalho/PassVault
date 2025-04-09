@@ -48,8 +48,11 @@ class PasswordListViewModel(
 
             is PasswordEvent.DeletePassword -> {
                 viewModelScope.launch {
-                    passwordUseCases.deletePasswordUseCase(event.password)
-                    lastDeletedPassword = event.password
+
+                    val password = passwordUseCases.getSinglePasswordUseCase(event.id) ?: return@launch
+
+                    passwordUseCases.deletePasswordUseCase(password)
+                    lastDeletedPassword = password
                 }
             }
 

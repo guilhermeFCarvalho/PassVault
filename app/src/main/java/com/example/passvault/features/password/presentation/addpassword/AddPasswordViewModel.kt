@@ -19,11 +19,8 @@ class AddPasswordViewModel(
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val _password = mutableStateOf(PasswordTextFieldState())
-    val password: State<PasswordTextFieldState> = _password
-
-    private val _label = mutableStateOf(PasswordTextFieldState())
-    val label: State<PasswordTextFieldState> = _label
+    private val _state = mutableStateOf(PasswordTextFieldState())
+    val state: State<PasswordTextFieldState> = _state
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()
 
@@ -37,28 +34,24 @@ class AddPasswordViewModel(
                 viewModelScope.launch {
                     passwordUseCases.getSinglePasswordUseCase(passwordId)?.also {
                         currentPasswordId = it.id
-                        _password.value = password.value.copy(
-                            password = it.password
-                        )
-                        _label.value = label.value.copy(
+                        _state.value = _state.value.copy(
+                            password = it.password,
                             label = it.label
                         )
                     }
-
                 }
             }
-
         }
     }
 
     fun onEvent(event: AddPasswordEvent) {
         when (event) {
             is AddPasswordEvent.PasswordChanged -> {
-                _password.value = password.value.copy(password = event.value)
+                _state.value = _state.value.copy(password = event.value)
             }
 
             is AddPasswordEvent.LabelChanged -> {
-                _label.value = label.value.copy(label = event.value)
+                _state.value = _state.value.copy(label = event.value)
             }
 
             is AddPasswordEvent.SavePassword -> {
@@ -67,8 +60,8 @@ class AddPasswordViewModel(
                         passwordUseCases.addPasswordUseCase(
                             Password(
                                 id = currentPasswordId,
-                                password = password.value.password,
-                                label = label.value.label
+                                password = state.value.password,
+                                label = state.value.label
                             )
                         )
 

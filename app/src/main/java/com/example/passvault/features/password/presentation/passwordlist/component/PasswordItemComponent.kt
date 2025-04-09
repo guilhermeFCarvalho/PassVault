@@ -29,13 +29,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.passvault.features.password.domain.model.Password
+import com.example.passvault.features.password.presentation.passwordlist.state.PasswordState
 import com.example.passvault.features.password.presentation.shared.component.HidePasswordButtonComponent
 import com.example.passvault.ui.theme.PassVaultTheme
 
 @Composable
 fun PasswordItemComponent(
-    password: Password,
+    password: PasswordState.Password,
     deleteOnClick: () -> Unit,
     editOnClick: () -> Unit,
     copyOnClick: () -> Unit,
@@ -116,9 +116,10 @@ fun PasswordItemComponent(
 fun PasswordItemComponentPreview() {
     PassVaultTheme {
         PasswordItemComponent(
-            password = Password(
+            password = PasswordState.Password(
                 label = "Netflix",
-                password = "AbcAbc123.213"
+                password = "AbcAbc123.213",
+                id = 0
             ),
             editOnClick = {},
             deleteOnClick = {},

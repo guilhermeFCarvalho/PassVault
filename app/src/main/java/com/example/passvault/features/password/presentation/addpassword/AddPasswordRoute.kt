@@ -18,9 +18,6 @@ fun AddPasswordRoute(
     viewModel: AddPasswordViewModel = koinViewModel()
 ) {
 
-    val labelState = viewModel.label.value
-    val passwordState = viewModel.password.value
-
     val snackbarState = remember { SnackbarHostState() }
 
     LaunchedEffect(key1 = true) {
@@ -42,8 +39,7 @@ fun AddPasswordRoute(
     AddPasswordScreen(
         modifier = modifier,
         snackbarState = snackbarState,
-        labelState = labelState,
-        passwordState = passwordState,
+        state = viewModel.state.value,
         onEvent = viewModel::onEvent
     )
 }

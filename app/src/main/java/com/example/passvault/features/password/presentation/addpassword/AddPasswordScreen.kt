@@ -31,8 +31,7 @@ import com.example.passvault.ui.theme.PassVaultTheme
 
 @Composable
 fun AddPasswordScreen(
-    labelState: PasswordTextFieldState,
-    passwordState: PasswordTextFieldState,
+    state: PasswordTextFieldState,
     onEvent: (AddPasswordEvent) -> Unit,
     snackbarState: SnackbarHostState,
     modifier: Modifier = Modifier,
@@ -58,7 +57,7 @@ fun AddPasswordScreen(
             )
         ) {
             TextField(
-                value = labelState.label,
+                value = state.label,
                 onValueChange = { label ->
                     onEvent(
                         AddPasswordEvent.LabelChanged(label)
@@ -70,7 +69,7 @@ fun AddPasswordScreen(
             )
 
             TextField(
-                value = passwordState.password,
+                value = state.password,
                 onValueChange = { password ->
                     onEvent(
                         AddPasswordEvent.PasswordChanged(password)
@@ -108,11 +107,7 @@ fun AddPasswordScreen(
 private fun DefaultPreview() {
     PassVaultTheme {
         AddPasswordScreen(
-            labelState = PasswordTextFieldState(
-                password = "123",
-                label = "test"
-            ),
-            passwordState = PasswordTextFieldState(
+            state = PasswordTextFieldState(
                 password = "123",
                 label = "test"
             ),

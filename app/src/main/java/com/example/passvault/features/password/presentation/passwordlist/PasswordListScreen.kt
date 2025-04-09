@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.passvault.core.navigation.Screen
-import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.presentation.passwordlist.component.PasswordItemComponent
 import com.example.passvault.features.password.presentation.passwordlist.event.PasswordEvent
 import com.example.passvault.features.password.presentation.passwordlist.state.PasswordState
@@ -101,7 +100,7 @@ fun PasswordListScreen(
                 PasswordItemComponent(
                     password = password,
                     deleteOnClick = {
-                        onEvent(PasswordEvent.DeletePassword(password))
+                        onEvent(PasswordEvent.DeletePassword(password.id))
                         scope.launch {
                             val result = snackbarState.showSnackbar(
                                 message = "Password deleted!",
@@ -138,9 +137,10 @@ private fun DefaultPreview() {
         PasswordListScreen(
             state = PasswordState(
                 passwords = listOf(
-                    Password(
+                    PasswordState.Password(
                         password = "123",
-                        label = "test"
+                        label = "test",
+                        id = 0
                     )
                 )
             ),

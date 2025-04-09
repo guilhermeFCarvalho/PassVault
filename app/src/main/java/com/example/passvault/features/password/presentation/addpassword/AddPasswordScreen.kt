@@ -7,15 +7,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -30,7 +32,6 @@ import com.example.passvault.features.password.presentation.shared.component.Hid
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 
-
 @Composable
 fun AddPasswordScreen(
     viewModel: AddPasswordViewModel = koinViewModel(),
@@ -39,7 +40,8 @@ fun AddPasswordScreen(
 
     val labelState = viewModel.label.value
     val passwordState = viewModel.password.value
-    val scaffoldState = rememberScaffoldState()
+
+    val snackbarState = remember { SnackbarHostState() }
 
     var isPasswordVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -47,7 +49,7 @@ fun AddPasswordScreen(
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
                 is AddPasswordViewModel.UiEvent.ShowSnackBar -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
+                    snackbarState.showSnackbar(
                         message = event.message
                     )
                 }
@@ -60,7 +62,9 @@ fun AddPasswordScreen(
     }
 
     Scaffold(
-        scaffoldState = scaffoldState,
+        snackbarHost = {
+            SnackbarHost(snackbarState)
+        },
     ) { padding ->
         Column(
             modifier = Modifier
@@ -104,11 +108,13 @@ fun AddPasswordScreen(
                 }
             )
             Spacer(Modifier.height(12.dp))
-            Button(onClick = { viewModel.onEvent(AddPasswordEvent.SavePassword) }) {
+            Button(
+                onClick = {
+                    viewModel.onEvent(AddPasswordEvent.SavePassword)
+                }
+            ) {
                 Text("Save Password")
             }
-
         }
     }
-
 }

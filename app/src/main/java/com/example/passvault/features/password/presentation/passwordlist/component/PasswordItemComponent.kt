@@ -11,14 +11,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CopyAll
 import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.filled.ModeEditOutline
+import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.presentation.shared.component.HidePasswordButtonComponent
 import com.example.passvault.ui.theme.PassVaultTheme
-
 
 @Composable
 fun PasswordItemComponent(
@@ -61,13 +60,13 @@ fun PasswordItemComponent(
                         AnimatedVisibility(visible = isPasswordVisible) {
                             Text(
                                 text = password.password,
-                                style = MaterialTheme.typography.body2.copy(fontSize = 10.sp)
+                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp)
                             )
                         }
                         AnimatedVisibility(visible = !isPasswordVisible) {
                             Text(
                                 text = "•".repeat(password.password.length),
-                                style = MaterialTheme.typography.body1,
+                                style = MaterialTheme.typography.bodyMedium,
                             )
                         }
 
@@ -112,9 +111,7 @@ fun PasswordItemComponent(
             }
         }
     }
-
 }
-
 
 @Preview
 @Composable
@@ -122,9 +119,8 @@ fun PasswordItemComponentPreview() {
     PasswordItemComponent(
         password = Password(
             label = "Netflix",
-            password = "AbcAbc123.213",
-
-            ),
+            password = "AbcAbc123.213"
+        ),
         editOnClick = {},
         deleteOnClick = {},
         copyOnClick = {},

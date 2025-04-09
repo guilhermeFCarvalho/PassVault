@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.add_password
+package com.example.passvault.features.password.presentation.addpassword
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.passvault.features.password.domain.model.InvalidPasswordException
 import com.example.passvault.features.password.domain.model.Password
-import com.example.passvault.features.password.domain.use_case.PasswordUseCases
+import com.example.passvault.features.password.domain.usecase.PasswordUseCases
+import com.example.passvault.features.password.presentation.addpassword.event.AddPasswordEvent
+import com.example.passvault.features.password.presentation.addpassword.state.PasswordTextFieldState
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch

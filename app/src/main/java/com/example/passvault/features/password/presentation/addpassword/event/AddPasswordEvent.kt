@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.add_password
+package com.example.passvault.features.password.presentation.addpassword.event
 
 sealed class AddPasswordEvent {
 

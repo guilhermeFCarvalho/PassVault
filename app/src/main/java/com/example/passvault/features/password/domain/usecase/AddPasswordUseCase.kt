@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.domain.use_case
+package com.example.passvault.features.password.domain.usecase
 
 import com.example.passvault.features.password.domain.model.InvalidPasswordException
 import com.example.passvault.features.password.domain.model.Password

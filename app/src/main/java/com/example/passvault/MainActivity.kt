@@ -11,9 +11,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.passvault.core.presentation.util.Screens
-import com.example.passvault.features.password.presentation.add_password.screens.AddPasswordScreen
-import com.example.passvault.features.password.presentation.password_list.screens.PasswordListScreen
+import com.example.passvault.core.navigation.Screen
+import com.example.passvault.features.password.presentation.addpassword.AddPasswordScreen
+import com.example.passvault.features.password.presentation.passwordlist.PasswordListScreen
 import com.example.passvault.ui.theme.PassVaultTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,13 +26,13 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screens.PasswordsScreen.route
+                        startDestination = Screen.PasswordsScreen.route
                     ) {
-                        composable(route = Screens.PasswordsScreen.route) {
+                        composable(route = Screen.PasswordsScreen.route) {
                             PasswordListScreen(navController = navController)
                         }
                         composable(
-                            route = Screens.AddPasswordsScreen.route + "?passwordId={passwordId}",
+                            route = Screen.AddPasswordsScreen.route + "?passwordId={passwordId}",
                             arguments = listOf(
                                 navArgument(name = "passwordId") {
                                     type = NavType.IntType

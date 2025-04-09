@@ -1,21 +1,16 @@
-package com.example.passvault.features.password.presentation.add_password.screens
+package com.example.passvault.features.password.presentation.addpassword
 
-import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Save
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,9 +25,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.passvault.features.password.presentation.add_password.AddPasswordEvent
-import com.example.passvault.features.password.presentation.add_password.AddPasswordViewModel
-import com.example.passvault.features.password.presentation.shared.components.HidePasswordButtonComponent
+import com.example.passvault.features.password.presentation.addpassword.event.AddPasswordEvent
+import com.example.passvault.features.password.presentation.shared.component.HidePasswordButtonComponent
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.compose.koinViewModel
 

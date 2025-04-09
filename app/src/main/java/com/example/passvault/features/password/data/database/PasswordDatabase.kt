@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.data.datasource
+package com.example.passvault.features.password.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

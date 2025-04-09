@@ -1,6 +1,6 @@
 package com.example.passvault.features.password.data.repository
 
-import com.example.passvault.features.password.data.datasource.PasswordDao
+import com.example.passvault.features.password.data.database.PasswordDao
 import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.domain.repository.PasswordRepository
 import kotlinx.coroutines.flow.Flow

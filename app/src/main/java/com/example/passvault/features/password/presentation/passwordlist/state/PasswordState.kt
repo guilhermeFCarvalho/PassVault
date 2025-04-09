@@ -1,7 +1,7 @@
-package com.example.passvault.features.password.presentation.password_list
+package com.example.passvault.features.password.presentation.passwordlist.state
 
 import com.example.passvault.features.password.domain.model.Password
-import com.example.passvault.features.password.domain.util.order_type.OrderType
+import com.example.passvault.features.password.domain.model.OrderType
 
 data class PasswordState(
     val passwords : List<Password> = emptyList(),

@@ -1,12 +1,14 @@
-package com.example.passvault.features.password.presentation.password_list
+package com.example.passvault.features.password.presentation.passwordlist
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.passvault.features.password.domain.model.Password
-import com.example.passvault.features.password.domain.use_case.PasswordUseCases
-import com.example.passvault.features.password.domain.util.order_type.OrderType
+import com.example.passvault.features.password.domain.usecase.PasswordUseCases
+import com.example.passvault.features.password.domain.model.OrderType
+import com.example.passvault.features.password.presentation.passwordlist.event.PasswordEvent
+import com.example.passvault.features.password.presentation.passwordlist.state.PasswordState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

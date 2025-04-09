@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.data.datasource
+package com.example.passvault.features.password.data.database
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.passvault.features.password.domain.model.Password
 import kotlinx.coroutines.flow.Flow
-
 
 @Dao
 interface PasswordDao {

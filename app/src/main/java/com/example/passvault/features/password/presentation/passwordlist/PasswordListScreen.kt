@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.password_list.screens
+package com.example.passvault.features.password.presentation.passwordlist
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -28,14 +28,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipEntry
-import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.passvault.core.presentation.util.Screens
-import com.example.passvault.features.password.presentation.password_list.PasswordEvent
-import com.example.passvault.features.password.presentation.password_list.PasswordViewModel
-import com.example.passvault.features.password.presentation.password_list.components.PasswordItemComponent
+import com.example.passvault.core.navigation.Screen
+import com.example.passvault.features.password.presentation.passwordlist.component.PasswordItemComponent
+import com.example.passvault.features.password.presentation.passwordlist.event.PasswordEvent
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
@@ -57,7 +55,7 @@ fun PasswordListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screens.AddPasswordsScreen.route)
+                    navController.navigate(Screen.AddPasswordsScreen.route)
                 },
                 content = {
                     Icon(Icons.Default.Add, contentDescription = "Add Password")
@@ -105,7 +103,7 @@ fun PasswordListScreen(
                             }
                         },
                         editOnClick = {
-                            navController.navigate(Screens.AddPasswordsScreen.route + "?passwordId=${password.id}")
+                            navController.navigate(Screen.AddPasswordsScreen.route + "?passwordId=${password.id}")
                         },
                         copyOnClick = {
                             val clipData = ClipData.newPlainText("Password", password.password)

@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.presentation.password_list.components
+package com.example.passvault.features.password.presentation.passwordlist.component
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
@@ -29,9 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.room.util.copy
 import com.example.passvault.features.password.domain.model.Password
-import com.example.passvault.features.password.presentation.shared.components.HidePasswordButtonComponent
+import com.example.passvault.features.password.presentation.shared.component.HidePasswordButtonComponent
 import com.example.passvault.ui.theme.PassVaultTheme
 
 

@@ -1,4 +1,4 @@
-package com.example.passvault.features.password.domain.util.order_type
+package com.example.passvault.features.password.domain.model
 
 sealed class OrderType {
     object Ascending: OrderType()

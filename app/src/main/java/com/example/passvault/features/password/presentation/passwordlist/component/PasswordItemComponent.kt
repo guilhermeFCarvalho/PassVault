@@ -42,73 +42,71 @@ fun PasswordItemComponent(
 ) {
     var isPasswordVisible by remember { mutableStateOf(false) }
 
-    PassVaultTheme {
-        Card {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-            ) {
-                Column {
-                    Row {
-                        Text(text = password.label)
-                    }
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        AnimatedVisibility(visible = isPasswordVisible) {
-                            Text(
-                                text = password.password,
-                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp)
-                            )
-                        }
-                        AnimatedVisibility(visible = !isPasswordVisible) {
-                            Text(
-                                text = "•".repeat(password.password.length),
-                                style = MaterialTheme.typography.bodyMedium,
-                            )
-                        }
-
-                        HidePasswordButtonComponent(
-                            isPasswordVisible = isPasswordVisible,
-                            onClick = { isPasswordVisible = it },
+    Card {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Column {
+                Row {
+                    Text(text = password.label)
+                }
+                Spacer(modifier = Modifier.height(12.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    AnimatedVisibility(visible = isPasswordVisible) {
+                        Text(
+                            text = password.password,
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp)
                         )
                     }
-                }
-                Spacer(Modifier.width(4.dp))
-                Column(verticalArrangement = Arrangement.SpaceBetween) {
-                    Icon(
-                        Icons.Filled.DeleteOutline,
-                        contentDescription = "Delete Password",
-                        modifier = Modifier
-                            .size(16.dp)
-                            .padding(end = 4.dp)
-                            .clickable { deleteOnClick() }
-                    )
-                    Spacer(Modifier.height(12.dp))
-                    Icon(
-                        Icons.Filled.ModeEditOutline,
-                        contentDescription = "Edit Password",
-                        modifier = Modifier
-                            .size(16.dp)
-                            .padding(end = 4.dp)
-                            .clickable { editOnClick() }
-                    )
-                    Spacer(Modifier.height(12.dp))
-                    Icon(
-                        Icons.Filled.CopyAll,
-                        contentDescription = "Copy Password",
-                        modifier = Modifier
-                            .size(16.dp)
-                            .padding(end = 4.dp)
-                            .clickable {
-                                copyOnClick()
-                            }
-                    )
-                }
+                    AnimatedVisibility(visible = !isPasswordVisible) {
+                        Text(
+                            text = "•".repeat(password.password.length),
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    }
 
+                    HidePasswordButtonComponent(
+                        isPasswordVisible = isPasswordVisible,
+                        onClick = { isPasswordVisible = it },
+                    )
+                }
             }
+            Spacer(Modifier.width(4.dp))
+            Column(verticalArrangement = Arrangement.SpaceBetween) {
+                Icon(
+                    Icons.Filled.DeleteOutline,
+                    contentDescription = "Delete Password",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .padding(end = 4.dp)
+                        .clickable { deleteOnClick() }
+                )
+                Spacer(Modifier.height(12.dp))
+                Icon(
+                    Icons.Filled.ModeEditOutline,
+                    contentDescription = "Edit Password",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .padding(end = 4.dp)
+                        .clickable { editOnClick() }
+                )
+                Spacer(Modifier.height(12.dp))
+                Icon(
+                    Icons.Filled.CopyAll,
+                    contentDescription = "Copy Password",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .padding(end = 4.dp)
+                        .clickable {
+                            copyOnClick()
+                        }
+                )
+            }
+
         }
     }
 }
@@ -116,13 +114,15 @@ fun PasswordItemComponent(
 @Preview
 @Composable
 fun PasswordItemComponentPreview() {
-    PasswordItemComponent(
-        password = Password(
-            label = "Netflix",
-            password = "AbcAbc123.213"
-        ),
-        editOnClick = {},
-        deleteOnClick = {},
-        copyOnClick = {},
-    )
+    PassVaultTheme {
+        PasswordItemComponent(
+            password = Password(
+                label = "Netflix",
+                password = "AbcAbc123.213"
+            ),
+            editOnClick = {},
+            deleteOnClick = {},
+            copyOnClick = {},
+        )
+    }
 }

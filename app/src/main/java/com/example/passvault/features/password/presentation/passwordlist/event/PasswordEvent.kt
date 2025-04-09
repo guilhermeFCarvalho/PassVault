@@ -4,7 +4,6 @@ import com.example.passvault.features.password.domain.model.Password
 
 sealed class PasswordEvent {
     data class DeletePassword(val password: Password): PasswordEvent()
-    object  RestorePassword: PasswordEvent()
-    object OrderPasswords: PasswordEvent()
-
+    data object  RestorePassword: PasswordEvent()
+    data object OrderPasswords: PasswordEvent()
 }

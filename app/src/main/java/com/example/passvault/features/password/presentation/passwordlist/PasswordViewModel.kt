@@ -18,7 +18,7 @@ class PasswordViewModel(
     private val passwordUseCases: PasswordUseCases
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<PasswordState>(PasswordState())
+    private val _state = mutableStateOf(PasswordState())
     val state: State<PasswordState> = _state
 
     private var lastDeletedPassword: Password? = null
@@ -58,8 +58,8 @@ class PasswordViewModel(
                         orderType = OrderType.Ascending
                     )
                 }
-                getPasswords(passwordOrder = state.value.orderType)
 
+                getPasswords(passwordOrder = state.value.orderType)
             }
         }
     }
@@ -71,7 +71,5 @@ class PasswordViewModel(
                 passwords = passwords,
             )
         }.launchIn(viewModelScope)
-
     }
-
 }

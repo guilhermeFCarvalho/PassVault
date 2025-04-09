@@ -85,8 +85,6 @@ class AddPasswordViewModel(
 
     sealed class UiEvent {
         data class ShowSnackBar(val message: String) : UiEvent()
-        object SavePassword : UiEvent()
+        data object SavePassword : UiEvent()
     }
-
-
 }

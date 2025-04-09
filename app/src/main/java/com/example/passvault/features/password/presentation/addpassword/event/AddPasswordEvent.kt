@@ -5,5 +5,5 @@ sealed class AddPasswordEvent {
     data class PasswordChanged(val value: String) : AddPasswordEvent()
     data class LabelChanged(val value: String) : AddPasswordEvent()
 
-    object SavePassword : AddPasswordEvent()
+    data object SavePassword : AddPasswordEvent()
 }

@@ -2,9 +2,7 @@ package com.example.passvault.features.password.presentation.addpassword
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
@@ -72,7 +70,10 @@ fun AddPasswordScreen(
                 .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.spacedBy(
+                space = 12.dp,
+                Alignment.CenterVertically
+            )
         ) {
             TextField(
                 value = labelState.label,
@@ -87,7 +88,7 @@ fun AddPasswordScreen(
                 singleLine = true,
                 placeholder = { Text("Label") },
             )
-            Spacer(Modifier.height(12.dp))
+
             TextField(
                 value = passwordState.password,
                 onValueChange = { password ->
@@ -100,15 +101,19 @@ fun AddPasswordScreen(
                 label = { Text("Password") },
                 singleLine = true,
                 placeholder = { Text("Password") },
-                visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = if (isPasswordVisible)
+                    VisualTransformation.None else PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password
+                ),
                 trailingIcon = {
                     HidePasswordButtonComponent(
                         isPasswordVisible = isPasswordVisible,
-                        onClick = { isPasswordVisible = it })
+                        onClick = { isPasswordVisible = it }
+                    )
                 }
             )
-            Spacer(Modifier.height(12.dp))
+
             Button(
                 onClick = {
                     viewModel.onEvent(AddPasswordEvent.SavePassword)

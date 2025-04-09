@@ -7,7 +7,6 @@ import kotlin.jvm.Throws
 
 class AddPasswordUseCase(private val repository: PasswordRepository) {
 
-
     @Throws(InvalidPasswordException::class)
     suspend operator fun invoke(password: Password){
         if(password.password.isBlank()){

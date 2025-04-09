@@ -24,7 +24,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.passvault.features.password.presentation.addpassword.event.AddPasswordEvent
 import com.example.passvault.features.password.presentation.shared.component.HidePasswordButtonComponent
 import kotlinx.coroutines.flow.collectLatest
@@ -32,8 +31,8 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AddPasswordScreen(
-    viewModel: AddPasswordViewModel = koinViewModel(),
-    navController: NavController
+    navigateUp: () -> Unit,
+    viewModel: AddPasswordViewModel = koinViewModel()
 ) {
 
     val labelState = viewModel.label.value
@@ -53,7 +52,7 @@ fun AddPasswordScreen(
                 }
 
                 is AddPasswordViewModel.UiEvent.SavePassword -> {
-                    navController.navigateUp()
+                    navigateUp()
                 }
             }
         }

@@ -23,13 +23,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             PassVaultTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
+
                     val navController = rememberNavController()
+
                     NavHost(
                         navController = navController,
                         startDestination = Screen.PasswordsScreen.route
                     ) {
                         composable(route = Screen.PasswordsScreen.route) {
-                            PasswordListScreen(navController = navController)
+                            PasswordListScreen(
+                                onNavigate = {
+                                    navController.navigate(it)
+                                }
+                            )
                         }
                         composable(
                             route = Screen.AddPasswordsScreen.route + "?passwordId={passwordId}",
@@ -40,7 +46,11 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            AddPasswordScreen(navController = navController)
+                            AddPasswordScreen(
+                                navigateUp = {
+                                    navController.navigateUp()
+                                }
+                            )
                         }
                     }
                 }

@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ClipEntry
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.passvault.core.navigation.Screen
 import com.example.passvault.features.password.presentation.passwordlist.component.PasswordItemComponent
 import com.example.passvault.features.password.presentation.passwordlist.event.PasswordEvent
@@ -39,7 +38,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordListScreen(
-    navController: NavController,
+    onNavigate: (String) -> Unit,
     viewModel: PasswordViewModel = koinViewModel()
 ) {
 
@@ -57,7 +56,7 @@ fun PasswordListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(Screen.AddPasswordsScreen.route)
+                    onNavigate(Screen.AddPasswordsScreen.route)
                 },
                 content = {
                     Icon(
@@ -110,7 +109,7 @@ fun PasswordListScreen(
                         }
                     },
                     editOnClick = {
-                        navController.navigate(Screen.AddPasswordsScreen.route + "?passwordId=${password.id}")
+                        onNavigate(Screen.AddPasswordsScreen.route + "?passwordId=${password.id}")
                     },
                     copyOnClick = {
                         val clipData = ClipData.newPlainText("Password", password.password)

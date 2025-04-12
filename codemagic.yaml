@@ -28,7 +28,19 @@ workflows:
       - name: Build AAB (release)
         script: |
           ./gradlew bundleRelease
-
+      - name: Check for sensitive files in repo
+        script: |
+          echo "Verifying sensitive files..."
+          SENSITIVE_FILES=("*.keystore" "*.jks" ".env" "google-services.json")
+          for pattern in "${SENSITIVE_FILES[@]}"; do
+          found=$(find . -name "$pattern")
+           if [ ! -z "$found" ]; then
+            echo "⚠️ Sensitive file(s) found:"
+            echo "$found"
+            exit 1
+          fi
+          done
+          echo "✅ No sensitive files found."
     artifacts:
       - app/build/outputs/**/*.aab
       - app/build/outputs/**/*.apk

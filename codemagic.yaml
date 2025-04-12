@@ -5,7 +5,7 @@ workflows:
     instance_type: mac_mini_m2
     environment:
       android_signing:
-        - keystore_reference
+        - release_key
       vars:
         PACKAGE_NAME: "com.example.passvault"
     scripts:

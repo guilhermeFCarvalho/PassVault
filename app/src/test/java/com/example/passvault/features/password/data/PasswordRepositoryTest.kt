@@ -28,7 +28,6 @@ class FakePasswordRepository : PasswordRepository {
     }
 }
 
-
 class PasswordRepositoryTest {
     private val repository: PasswordRepository = FakePasswordRepository()
 
@@ -41,8 +40,6 @@ class PasswordRepositoryTest {
 
         assertEquals(1, passwords.size)
         assertEquals(password, passwords.first())
-
-
     }
 
     @Test

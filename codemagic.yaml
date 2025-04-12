@@ -25,12 +25,7 @@ workflows:
         script: |
           ./gradlew assembleRelease
 
-      - name: Build AAB (release)
-        script: |
-          ./gradlew bundleRelease
-
     artifacts:
-      - app/build/outputs/**/*.aab
       - app/build/outputs/**/*.apk
       - app/build/reports/lint-results-*.html
       - app/build/reports/tests/**/*.html

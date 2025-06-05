@@ -1,5 +1,9 @@
 package com.example.passvault.features.password.data
 
+import com.example.passvault.features.password.data.database.FakeDao
+import com.example.passvault.features.password.data.database.PasswordDao
+import com.example.passvault.features.password.data.database.model.PasswordEntity
+import com.example.passvault.features.password.data.repository.PasswordRepositoryImpl
 import com.example.passvault.features.password.domain.model.Password
 import com.example.passvault.features.password.domain.repository.PasswordRepository
 import kotlinx.coroutines.flow.Flow
@@ -28,8 +32,27 @@ class FakePasswordRepository : PasswordRepository {
     }
 }
 
+class FakeDao : PasswordDao{
+    override fun getPasswords(): Flow<List<PasswordEntity>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getPasswordById(id: Int): PasswordEntity? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun insertPassword(password: PasswordEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deletePassword(password: PasswordEntity) {
+        TODO("Not yet implemented")
+    }
+
+}
+
 class PasswordRepositoryTest {
-    private val repository: PasswordRepository = FakePasswordRepository()
+    private val repository: PasswordRepository = PasswordRepositoryImpl(FakeDao())
 
     @Test
     fun `insets password correctly`() = runTest {

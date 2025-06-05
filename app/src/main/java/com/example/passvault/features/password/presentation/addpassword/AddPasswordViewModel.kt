@@ -26,9 +26,11 @@ class AddPasswordViewModel(
 
     val eventFlow = _eventFlow.asSharedFlow()
 
+
     private var currentPasswordId: Int? = null
 
     init {
+
         savedStateHandle.get<Int>("passwordId")?.let { passwordId ->
             if (passwordId != -1) {
                 viewModelScope.launch {
@@ -44,6 +46,8 @@ class AddPasswordViewModel(
         }
     }
 
+
+    //onAction/onIntent   AddPasswordAction/Intent
     fun onEvent(event: AddPasswordEvent) {
         when (event) {
             is AddPasswordEvent.PasswordChanged -> {

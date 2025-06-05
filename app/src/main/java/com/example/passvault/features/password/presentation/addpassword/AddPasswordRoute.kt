@@ -35,7 +35,13 @@ fun AddPasswordRoute(
             }
         }
     }
+    if(viewModel.state.value.snackBarMessage.isNotEmpty()){
+        snackbarState.showSnackbar(
+            message = event.message
+        )
 
+        viewModel.clearSnackbarMessage()
+    }
     AddPasswordScreen(
         modifier = modifier,
         snackbarState = snackbarState,
